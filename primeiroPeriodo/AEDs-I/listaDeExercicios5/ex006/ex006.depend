@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1715082774 source:/home/lucas/faculdade/aed/listaDeExercicios5/listaDeExercicios5AEDS/ex006/main.c
+	<stdio.h>
+	<stdlib.h>
+
