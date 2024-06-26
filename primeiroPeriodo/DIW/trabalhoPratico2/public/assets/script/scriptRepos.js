@@ -11,7 +11,7 @@ function success () {
     for(let i = 0; i < obj.length;i++)
     {
       txt += `<div class="col">
-      <a class="text-decoration-none" href="repo.html">
+      <a class="text-decoration-none" href="repo.html?type=${i}">
         <div class="card">
         
         <div class="card-body">
