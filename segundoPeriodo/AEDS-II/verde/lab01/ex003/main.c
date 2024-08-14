@@ -31,4 +31,8 @@ int main ()
 		scanf(" %[^\n]",word);
 
 	}
+
+	free(word);
+
+	return 0;
 }
