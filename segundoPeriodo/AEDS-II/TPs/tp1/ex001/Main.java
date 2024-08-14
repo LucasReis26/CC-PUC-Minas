@@ -6,16 +6,28 @@ public class Main
 	{
 		Scanner sc = new Scanner(System.in);
 
-		String word = sc.nextLine();
+		String word = "START";
+		
+		while (!word.equals("FIM"))
+		{
 
-		if(ehPalindromo(word))
-		{
-			System.out.println("SIM");
+			word = sc.nextLine();
+
+			if(ehPalindromo(word))
+			{
+				System.out.println("SIM");
+			}
+			else
+			{
+				if (!word.equals("FIM"))
+				{
+					System.out.println("NAO");
+				}
+			}
+
 		}
-		else
-		{
-			System.out.println("NÃO");
-		}
+
+		sc.close();
 	}
 
 	public static boolean ehPalindromo (String word)
