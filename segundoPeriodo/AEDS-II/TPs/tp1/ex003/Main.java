@@ -1,29 +1,71 @@
-import java.util.*;
-
 public class Main
-{
-	public static String ciframentoDeCezar (String word, int key)
+{       
+	public static boolean cmpstr (String word, String cmp)
 	{
-		String criptoWord = new StringBuilder();
+		boolean resp = false;
+		int error = 0;
 		
-		int tam = word.length();
-
-		for(int i = 0; i < tam; i++)
+		if (word.length() == cmp.length())
 		{
-			criptoWord.charAt(i) =(char) word.charAt(i) + key;
+			for (int i = 0; i < word.length(); i++)
+			{
+				if (word.charAt (i) != cmp.charAt (i))
+				{
+					error++;
+				}
+				else
+				{
+					resp = true;
+				}
+			}
 		}
 
-		return criptoWord.toString();
+		if (error > 0)
+		{
+			resp = false;
+		}
+
+		return resp;
+	}
+	public static String cifra (String word, int key)
+	{
+		char[] wordCifra = new char[word.length()];
+
+		for (int i = 0; i < word.length(); i++)
+		{
+			if (word.charAt(i) == '�')
+				wordCifra[i] = '�';
+			else if ((word.charAt(i) + key) <= 124)
+				wordCifra[i] = (char) (word.charAt(i) + key);
+			else
+				wordCifra[i] = (char) (32 + ((word.charAt(i) + key) - 126));
+
+		}
+
+		String result = new String(wordCifra);
+
+		return result;
+	}
+
+	public static String cifra (String word)
+	{
+		return cifra (word, 3);
 	}
 
 	public static void main (String[] args)
 	{
-		Scanner sc = new Scanner(System.in);
 
-		String word = sc.nextLine();
+		String word = new String();
+
+		while (!cmpstr(word,"FIM"))
+		{
+			word = MyIO.readLine();
+			
+			if (!cmpstr(word,"FIM"))
+			{
+				MyIO.println(cifra(word));
+			}
 	
-		int key = sc.nextInt();
-
-		System.out.println(ciframentoDeCezar(word,key));
+		}
 	}
 }
