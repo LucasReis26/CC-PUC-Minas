@@ -17,15 +17,21 @@ int main()
 {
 	char *word = (char*)malloc(255*sizeof(char));
 
-	scanf("%[^\n]",word);
+	while(strcmp(word,"FIM") != 0)
+	{
+		scanf(" %[^\n]",word);
 
-	if(ehPalindromo(word,0,strlen(word) - 1))
-	{
-		printf("SIM\n");
-	}
-	else
-	{
-		printf("NÃO\n");
+		if (strcmp(word,"FIM") != 0)
+		{
+			if(ehPalindromo(word,0,strlen(word) - 1))
+			{
+				printf("SIM\n");
+			}
+			else
+			{
+				printf("NAO\n");
+			}
+		}
 	}
 
 	free(word);
