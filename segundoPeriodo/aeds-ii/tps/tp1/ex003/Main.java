@@ -1,7 +1,10 @@
+import java.util.Scanner;
+
 public class Main
 {       
 	public static boolean cmpstr (String word, String cmp)
 	{
+
 		boolean resp = false;
 		int error = 0;
 		
@@ -33,9 +36,7 @@ public class Main
 
 		for (int i = 0; i < word.length(); i++)
 		{
-			if (word.charAt(i) == '�')
-				wordCifra[i] = '�';
-			else if ((word.charAt(i) + key) <= 124)
+			if ((word.charAt(i) + key) <= 124)
 				wordCifra[i] = (char) (word.charAt(i) + key);
 			else
 				wordCifra[i] = (char) (32 + ((word.charAt(i) + key) - 126));
@@ -55,12 +56,16 @@ public class Main
 	public static void main (String[] args)
 	{
 
+		System.setProperty("file.encoding", "UTF-8");
+
+		Scanner sc = new Scanner(System.in);
+
 		String word = new String();
 
 		while (!cmpstr(word,"FIM"))
 		{
-			word = MyIO.readLine();
-			
+			word = sc.nextLine();
+
 			if (!cmpstr(word,"FIM"))
 			{
 				MyIO.println(cifra(word));
