@@ -7,7 +7,7 @@ public class Main
 
 		boolean resp = false;
 		int error = 0;
-		
+
 		if (word.length() == cmp.length())
 		{
 			for (int i = 0; i < word.length(); i++)
@@ -36,10 +36,14 @@ public class Main
 
 		for (int i = 0; i < word.length(); i++)
 		{
-			if ((word.charAt(i) + key) <= 124)
-				wordCifra[i] = (char) (word.charAt(i) + key);
+			if (word.charAt(i) < 32 || word.charAt(i) > 126)
+			{
+				wordCifra[i] = (char) word.charAt(i);
+			}
 			else
-				wordCifra[i] = (char) (32 + ((word.charAt(i) + key) - 126));
+			{
+				wordCifra[i] = (char) ((word.charAt(i) - 32 + key) % 95	+ 32);
+			}
 
 		}
 
@@ -56,8 +60,6 @@ public class Main
 	public static void main (String[] args)
 	{
 
-		System.setProperty("file.encoding", "UTF-8");
-
 		Scanner sc = new Scanner(System.in);
 
 		String word = new String();
@@ -68,9 +70,9 @@ public class Main
 
 			if (!cmpstr(word,"FIM"))
 			{
-				MyIO.println(cifra(word));
+				System.out.println(cifra(word));
 			}
-	
+
 		}
 	}
 }
