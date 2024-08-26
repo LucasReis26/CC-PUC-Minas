@@ -17,15 +17,21 @@ public class Main
 	{
 		Scanner sc = new Scanner (System.in);
 
-		String word = sc.nextLine();
+		String word;
 
-		if(ehPalindromo (word,0,word.length() - 1))
+		do
 		{
-			System.out.println("SIM");
-		}
-		else
-		{
-			System.out.println("NÃO");
-		}
+			word = sc.nextLine();
+
+			if(ehPalindromo (word,0,word.length() - 1))
+			{
+				System.out.println("SIM");
+			}
+			else
+			{
+				if (!word.equals("FIM"))
+					System.out.println("NAO");
+			}
+		} while (!word.equals("FIM"));
 	}
 }
