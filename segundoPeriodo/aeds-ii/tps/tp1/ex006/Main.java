@@ -79,7 +79,7 @@ public class Main
 	{
 		//Variáveis a serem utilizadas
 		boolean resp = true;
-		boolean ehReal = false;
+		int countDec = 0;
 		int count = 0;
 		char[] wordChar = word.toCharArray();
 		//Conta quantos números tem na palavra
@@ -88,12 +88,12 @@ public class Main
 			if((wordChar[i] >= 48 && wordChar[i] <= 57) || (wordChar[i] == 46) || (wordChar[i] == 44))
 			{
 				if(wordChar[i] == 46 || wordChar[i] == 44)
-					ehReal = true;
+					countDec++;
 				count++;
 			}
 		}
 		//Se o contador for do tamanho da string, a string é um inteiro
-		if (count == word.length() && ehReal)
+		if (count == word.length() && countDec == 1)
 			resp = true;
 		else //Se a quantidade for menor, não é um inteiro
 			resp = false;
