@@ -5,7 +5,8 @@ public class Main
 	public static void main(String[] args)
 	{
 		int countOpen = 0, 
-		    countClose = 0;
+		    countClose = 0,
+		    error = 0;
 
 		String word;
 
@@ -24,14 +25,22 @@ public class Main
 					if (word.charAt(i) == '(')
 						countOpen++;
 					else if (word.charAt(i) == ')')
-						countClose++;
+					{
+						if (countOpen > countClose)
+							countClose++;
+						else
+							error++;
+					}
 				}
 
-				if (countOpen == countClose)
+				if (countOpen == countClose && error == 0)
 					System.out.println("correto");
 				else
 					System.out.println("incorreto");
 			}
+
+			countOpen = 0;
+			countClose = 0;
 
 		}
 		while(!word.equals("FIM"));
