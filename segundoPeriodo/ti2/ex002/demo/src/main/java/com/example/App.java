@@ -1,4 +1,4 @@
-package com.ti2cc;
+package com.example;
 
 /**
  * Hello world!
