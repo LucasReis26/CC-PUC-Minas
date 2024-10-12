@@ -394,11 +394,15 @@ public class Main
     {
 
         String linha;
+        int j = 0;
         Pokemon[] pokedex = new Pokemon[801];
+        int[] numPokemon = new int[801];
         
         Scanner sc = new Scanner(System.in);
+        String pokeName;
+        String[] procuraPokemon = new String[801];
 
-        String procuraPokemon = sc.nextLine();
+        
 
         for(int i = 0; i < 801; i++)
         {
@@ -407,6 +411,7 @@ public class Main
         try
         {
             RandomAccessFile raf = new RandomAccessFile("/tmp/pokemon.csv","r");
+            RandomAccessFile log = new RandomAccessFile("matrícula_sequencial.txt","rw");
 
             
             raf.readLine();
@@ -420,18 +425,53 @@ public class Main
                 pokedex[i] = converteLinha(linha);
             }
 
-            while(!procuraPokemon.equals("FIM"))
+            procuraPokemon[j] = sc.nextLine();
+
+            while(!procuraPokemon[j].equals("FIM"))
             {
-                int numPokemon = Integer.parseInt(procuraPokemon);
+                numPokemon[j] = Integer.parseInt(procuraPokemon[j]);
+                //System.out.println(pokedex[numPokemon[j] - 1].getName());
 
-                pokedex[numPokemon - 1].print();
-                System.out.println();
+                j++;
 
-                procuraPokemon = sc.nextLine();
+                procuraPokemon[j] = sc.nextLine();
             }
+
+            pokeName = sc.nextLine();
+            long tempoInicio = System.currentTimeMillis();
+            int comparacoes = 0;
+            while(!pokeName.equals("FIM"))
+            {
+                boolean achou = false;
+
+                for(int i = 0; i < j; i++)
+                {
+                    
+                    if(pokeName.equals(pokedex[numPokemon[i] - 1].getName()))
+                    {
+                        
+                        achou = true;
+                    }
+                    comparacoes++;
+                }
+
+                if(achou == true)
+                    System.out.println("SIM");
+                else
+                    System.out.println("NAO");
+
+                pokeName = sc.nextLine();
+            }
+
+            long tempoFim = System.currentTimeMillis() - tempoInicio;
+
+            Double tempoSegundos = tempoFim / 1000.0;
+
+            log.writeChars("[853431]\t" + "["+tempoSegundos + " segundos]\t" + "["+comparacoes+" comparações]");
 
             sc.close();
             raf.close();
+            log.close();
         } 
         catch (IOException e)
         {
