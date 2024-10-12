@@ -398,41 +398,26 @@ public class Main
         array[n2] = temp;
     }
 
-    public static int avaliaAlfabeto(String n1, String n2)
+    public static int avaliaData(Date d1, Date d2)
     {
-        int tam = 0;
         int resp = 0;
 
-        if(n1.length() < n2.length())
-            tam = n1.length();
-        else if (n2.length() < n1.length())
-            tam = n2.length();
-        else
-            tam = n1.length();
-
-        for(int i = 0; i < tam; i++)
-        {
-            if(n1.charAt(i) < n2.charAt(i))
-            {
-                i = tam;
-                resp = -1;
-            }
-            else if(n2.charAt(i) < n1.charAt(i))
-            {
-                i = tam;
-                resp = 1;
-            }
-        }
+        if(d1.getYear() < d2.getYear())
+            resp = -1;
+        else if(d2.getYear() < d1.getYear())
+            resp = 1;
+        
         if(resp == 0)
-        {
-            if(n1.length() < n2.length())
+            if(d1.getMonth() < d2.getMonth())
                 resp = -1;
-            else if (n2.length() < n1.length())
+            else if(d2.getMonth() < d1.getMonth())
                 resp = 1;
-            else
-                resp = 0;
-        }
 
+        if(resp == 0)
+            if(d1.getDay() < d2.getDay())
+                resp = -1;
+            else if(d2.getDay() < d1.getDay())
+                resp = 1;
 
         return resp;
     }
@@ -488,19 +473,18 @@ public class Main
             for(int i = 0; i < j - 1; i++)
             {
                 comparacoes++;
-                int menor = i;
+                int p = i + 1;
 
-                for(int p = i + 1; p < j; p++)
+                while(p > 0 && avaliaData(pokedex[numPokemon[p] - 1].getCaptureDate(),pokedex[numPokemon[p - 1] - 1].getCaptureDate()) < 0)
                 {
-                    if(avaliaAlfabeto(pokedex[numPokemon[menor] - 1].getName(),pokedex[numPokemon[p] - 1].getName()) > 0)
-                    {
-                        
-                        menor = p;
-                    }
-                    comparacoes += 2;
+                    comparacoes+=8;
+                    //pokedex[numPokemon[p - 1]].getCaptureDate().print();
+                    //System.out.print(" < ");
+                    //pokedex[numPokemon[p]].getCaptureDate().print();
+                    //System.out.println();
+                    swap(numPokemon, p, p - 1);
+                    p--;
                 }
-                //System.out.println(pokedex[numPokemon[menor]].getName() + " vem antes de " + pokedex[numPokemon[i]].getName());
-                swap(numPokemon, i, menor);
             }
 
             long tempoFim = System.currentTimeMillis() - tempoInicio;
