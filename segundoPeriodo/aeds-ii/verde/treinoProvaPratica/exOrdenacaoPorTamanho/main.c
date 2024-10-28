@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void separaPalavras(char *word,char ***arrayString)
+int separaPalavras(char *word,char ***arrayString)
 {
 	int contador = 1;
 
@@ -37,18 +37,25 @@ void separaPalavras(char *word,char ***arrayString)
 		}	
 	}
 	(*arrayString)[stringCount][charCount] = '\0';
+	
+	return contador;
+}
+
+int* organizaPalavras(int **arrayString)
+{
+	int *intArray = (int *)malloc(sizeof(int));
 }
 
 int main()
 {
 	char **arrayString;
-	char *string = (char *)malloc(51*sizeof(char));\
+	char *string = (char *)malloc(51*sizeof(char));
 
 	scanf(" %[^\n]",string);
 
-	separaPalavras(string,&arrayString)
-
+	int contaPalavras = separaPalavras(string,&arrayString);
 	
+	int *organizaPalavras = organizaPalavras(arrayString);	
 
 	return 0;
 }
