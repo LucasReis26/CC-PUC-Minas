@@ -84,6 +84,23 @@ class Pilha{
 		}
 		return soma;
 	}
+
+	//Exercício 03
+	public Integer getMaior(){
+		if(this.topo != null){
+			Integer maior = this.topo.getElemento();
+
+			for(Celula i = this.topo.getProx(); i != null; i = i.getProx()){
+				if(i.getElemento() > maior){
+					maior = i.getElemento();
+				}
+			}
+
+			return maior;
+		} else {
+			return 0;
+		}
+	}
 	
 
 	//Get && Set
@@ -107,6 +124,7 @@ public class Main{
 			System.out.println("2 - Mostrar Elementos");
 			System.out.println("3 - Somar Elementos Recursivamente");
 			System.out.println("4 - Somar Elementos Iterativamente");
+			System.out.println("5 - Mostrar Maior Elemento");
 			System.out.println("0 - Sair");
 			System.out.print("\nSua opção: ");
 			op = sc.nextInt();
@@ -144,6 +162,14 @@ public class Main{
 					System.out.println("A soma dos elementos é: " + pilha.somarIte());
 					System.out.println();
 					System.out.print("Aperte ENTER para continuar...");
+					sc.nextLine();
+					limpaTela();
+					break;
+				case 5:
+					limpaTela();
+					System.out.println("\n-- Mostrando Maior Elemento --");
+					System.out.println("O maior elemento da Pilha é: " + pilha.getMaior());
+					System.out.println("\nAperte ENTER para continuar...");
 					sc.nextLine();
 					limpaTela();
 					break;
