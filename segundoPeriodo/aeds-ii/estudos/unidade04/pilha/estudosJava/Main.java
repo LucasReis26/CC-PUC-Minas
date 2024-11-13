@@ -45,9 +45,14 @@ class Pilha{
 		tmp = null;
 	}
 
+	//Exercício 05
 	public void mostrar(){
-		System.out.print("[ ");
-		mostrar(this.topo);
+		if(this.topo != null){
+			System.out.print("[ ");
+			mostrar(this.topo);
+		}else{
+			System.out.println("[  ]");
+		}
 	}
 	private void mostrar(Celula i){
 		if(i.getProx() == null){
@@ -57,7 +62,26 @@ class Pilha{
 			mostrar(i.getProx());
 		}
 	}
-
+	//Exercício 06
+	public void mostrarInvertido(){
+		if(this.topo != null){
+			System.out.print("[ ");
+			mostrarInvertido(this.topo);
+		}else{
+			System.out.println("[  ]");
+		}
+	}
+	private void mostrarInvertido(Celula i){
+		if(i.getProx() == null){
+			System.out.print(i.getElemento() + ", ");
+		}else{
+			mostrarInvertido(i.getProx());
+			if(i.getProx().getProx() == null)
+				System.out.print(i.getElemento() + ", ");
+			else
+				System.out.println(i.getElemento() + " ]");
+		}
+	}
 	//Exercício 01
 	public Integer somarIte(){
 		int soma = 0;
@@ -101,7 +125,29 @@ class Pilha{
 			return 0;
 		}
 	}
-	
+
+	//Exercício 04
+	public Integer getMaiorRecur(){
+		if(this.topo != null){
+			return getMaiorRecur(this.topo);
+		}
+		return 0;
+	}
+	public Integer getMaiorRecur(Celula i){
+		if(i != null){
+			Integer maior = getMaiorRecur(i.getProx());
+
+			if(i.getElemento() > maior){
+				return i.getElemento();
+			}else if(maior > i.getElemento()){
+				return maior;
+			}else{
+				return i.getElemento();
+			}
+		}else{
+			return Integer.MIN_VALUE;
+		}
+	}
 
 	//Get && Set
 	public Celula getTopo(){
@@ -111,9 +157,13 @@ class Pilha{
 
 public class Main{
 	public static void limpaTela(){
-		System.out.print("\033[H\033[2J");
+		for(int i = 0; i < 50; i++){
+			System.out.println();
+		}
+		System.out.print("\033[H");
 	}
 	public static void main(String[] args) throws IOException{
+		limpaTela();
 		Scanner sc = new Scanner(System.in);
 		Integer op = null;
 		Pilha pilha = new Pilha();
@@ -122,9 +172,11 @@ public class Main{
 			System.out.println("\nEscolha uma opção: ");
 			System.out.println("\n1 - Inserir Elemento");
 			System.out.println("2 - Mostrar Elementos");
-			System.out.println("3 - Somar Elementos Recursivamente");
-			System.out.println("4 - Somar Elementos Iterativamente");
-			System.out.println("5 - Mostrar Maior Elemento");
+			System.out.println("3 - Mostrar Elementos Invertidos");
+			System.out.println("4 - Somar Elementos Recursivamente");
+			System.out.println("5 - Somar Elementos Iterativamente");
+			System.out.println("6 - Mostrar Maior Elemento Iterativo");
+			System.out.println("7 - Mostrar Maior Elemento Recursivo");
 			System.out.println("0 - Sair");
 			System.out.print("\nSua opção: ");
 			op = sc.nextInt();
@@ -149,8 +201,8 @@ public class Main{
 					break;
 				case 3:
 					limpaTela();
-					System.out.println("\n-- Somando Elementos --");
-					System.out.println("A soma dos elementos é: "+ pilha.somar());
+					System.out.println("\n-- Mostrando Elementos --");
+					pilha.mostrarInvertido();
 					System.out.println();
 					System.out.print("Aperte ENTER para continuar...");
 					sc.nextLine();
@@ -159,7 +211,7 @@ public class Main{
 				case 4:
 					limpaTela();
 					System.out.println("\n-- Somando Elementos --");
-					System.out.println("A soma dos elementos é: " + pilha.somarIte());
+					System.out.println("A soma dos elementos é: "+ pilha.somar());
 					System.out.println();
 					System.out.print("Aperte ENTER para continuar...");
 					sc.nextLine();
@@ -167,10 +219,30 @@ public class Main{
 					break;
 				case 5:
 					limpaTela();
+					System.out.println("\n-- Somando Elementos --");
+					System.out.println("A soma dos elementos é: " + pilha.somarIte());
+					System.out.println();
+					System.out.print("Aperte ENTER para continuar...");
+					sc.nextLine();
+					limpaTela();
+					break;
+				case 6:
+					limpaTela();
 					System.out.println("\n-- Mostrando Maior Elemento --");
 					System.out.println("O maior elemento da Pilha é: " + pilha.getMaior());
 					System.out.println("\nAperte ENTER para continuar...");
 					sc.nextLine();
+					limpaTela();
+					break;
+				case 7:
+					limpaTela();
+					System.out.println("\n-- Mostrando Maior Elemento --");
+					System.out.println("O maior elemento da Pilha é: " + pilha.getMaiorRecur());
+					System.out.println("\nAperte ENTER para continuar...");
+					sc.nextLine();
+					limpaTela();
+					break;
+				case 0:
 					limpaTela();
 					break;
 			}
