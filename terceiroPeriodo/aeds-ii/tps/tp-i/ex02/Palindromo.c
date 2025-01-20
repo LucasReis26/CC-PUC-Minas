@@ -15,7 +15,8 @@ int ehPalindromo(char *word){
         }
 
     }
-        return resp;
+
+    return resp;
 }
 
 int main(){
