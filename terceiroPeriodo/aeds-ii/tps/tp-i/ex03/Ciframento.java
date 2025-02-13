@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Ciframento{
     
-    static String cifra(String word){
+    public static String cifra(String word){
         char[] wordChar = new char[word.length()];
 
         for(int i = 0; i < word.length(); i++){

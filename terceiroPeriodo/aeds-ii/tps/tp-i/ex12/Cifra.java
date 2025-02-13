@@ -3,10 +3,10 @@ package ex12;
 import java.util.Scanner;
 
 public class Cifra {
-    public static void cifraRec(char[] wordChar, int i){
-        if(i >= wordChar.length)
-            return;
-        else{
+
+    public static void cifraRec(char[] wordChar, int i) {
+        if (i >= wordChar.length) return;
+        else {
             wordChar[i] = (char) (wordChar[i] + 3);
             cifraRec(wordChar, ++i);
         }
